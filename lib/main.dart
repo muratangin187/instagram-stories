@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +26,8 @@ class StoryPlayer extends StatelessWidget {
         body: Center(
             child: Column(
           children: [
+            ElevatedButton(
+                child: const Text("Init"), onPressed: () => c.init()),
             ElevatedButton(
                 child: const Text("Stop"), onPressed: () => c.stop()),
             ElevatedButton(
@@ -63,6 +67,9 @@ class StoryPlayer extends StatelessWidget {
 }
 
 class Controller extends GetxController {
+  final stopwatch = Stopwatch();
+  Timer? timer;
+
   var stories = [
     [
       Story(
@@ -96,12 +103,31 @@ class Controller extends GetxController {
 
   var visitedStoriesIds = <int>[0, 0, 0].obs;
 
+  init() {
+    if (timer != null) {
+      return;
+    }
+    timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      currentState["currentTime"] = stopwatch.elapsedMilliseconds;
+      // if current story duration exceeds change story
+      if ((currentState["currentTime"] as int) >=
+          stories[currentState["currentStoryGroupId"]! as int]
+                  [currentState["currentStoryId"]! as int]
+              .duration) {
+        rightTap();
+        stopwatch.reset();
+      }
+    });
+  }
+
   stop() {
     currentState["isPlaying"] = false;
+    stopwatch.stop();
   }
 
   start() {
     currentState["isPlaying"] = true;
+    stopwatch.start();
   }
 
   leftTap() {
@@ -120,6 +146,7 @@ class Controller extends GetxController {
     }
     visitedStoriesIds[currentState["currentStoryGroupId"]! as int] =
         currentState["currentStoryId"]! as int;
+    stopwatch.reset();
   }
 
   rightTap() {
@@ -138,6 +165,7 @@ class Controller extends GetxController {
     }
     visitedStoriesIds[currentState["currentStoryGroupId"]! as int] =
         currentState["currentStoryId"]! as int;
+    stopwatch.reset();
   }
 
   leftSwipe() {
@@ -149,6 +177,7 @@ class Controller extends GetxController {
       currentState["currentStoryId"] =
           visitedStoriesIds[currentState["currentStoryGroupId"]! as int];
     }
+    stopwatch.reset();
   }
 
   rightSwipe() {
@@ -160,6 +189,7 @@ class Controller extends GetxController {
       currentState["currentStoryId"] =
           visitedStoriesIds[currentState["currentStoryGroupId"]! as int];
     }
+    stopwatch.reset();
   }
 }
 
