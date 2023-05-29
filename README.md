@@ -1,16 +1,5 @@
 # instagram_story
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://github.com/muratangin187/instagram-stories/assets/45319425/c8f95b96-65c6-467c-ac08-7c01319dd007" width="430" height="932">
+<img src="https://github.com/muratangin187/instagram-stories/assets/45319425/86e8ef08-a2ef-499f-a517-ef166a744366" width="430" height="932">
+<img src="https://github.com/muratangin187/instagram-stories/assets/45319425/1bc102c7-28dc-4899-be31-2421465283b4" width="430" height="932">
